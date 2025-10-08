@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use function Pest\Laravel\{actingAs};
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -41,7 +45,11 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function login(): User|Authenticatable
 {
-    // ..
+    /** @var User|Authenticatable $user */
+    $user = User::factory()->create();
+    actingAs($user);
+
+    return $user;
 }

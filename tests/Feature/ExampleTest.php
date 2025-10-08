@@ -1,7 +1,15 @@
 <?php
 
-it('returns a successful response', function () {
-    $response = $this->get('/');
+use App\Models\User;
+use function Pest\Laravel\{assertDatabaseCount};
 
-    $response->assertStatus(200);
+
+it('example', function () {
+    assertDatabaseCount('users', 0);
+
+    // começa vazio
+    User::factory()->count(2)->create();
+
+    assertDatabaseCount('users', 2);
+    // agora deve ter 2
 });
